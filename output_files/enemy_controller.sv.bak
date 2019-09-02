@@ -1,0 +1,21 @@
+module enemy_controller
+(
+	input logic 			v_sync;
+	output logic [7:0] 	animation_offset;
+);
+
+
+logic [9:0] counter;
+
+always_ff @ (posedge v_sync) begin
+	counter <= counter + 1;
+end
+
+always_comb begin
+
+	if(counter[6:0] == 7'b1111000)
+		animation_offset = 8'd8;
+	else
+		animation_offset = 8'd0;
+
+end

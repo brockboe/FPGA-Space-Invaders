@@ -1,0 +1,11 @@
+module player_missile
+(
+	input		logic	[9:0]	playerx,
+	input		logic			vsync,
+	
+	output	logic [9:0]	playerMissileX,
+	output	logic [9:0] playerMissileY
+);
+
+
+endmodule

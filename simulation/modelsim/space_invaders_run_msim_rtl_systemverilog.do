@@ -1,0 +1,21 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vlib nios_system
+vmap nios_system nios_system
+vlog -vlog01compat -work nios_system +incdir+C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject/nios_system/synthesis/submodules {C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject/nios_system/synthesis/submodules/nios_system_jtag_uart_0.v}
+vlog -sv -work work +incdir+C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject {C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject/sprite_rom.sv}
+
+vlog -sv -work work +incdir+C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject {C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject/testbench.sv}
+vlog -sv -work work +incdir+C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject {C:/Users/Brock/School/ECE385/GitLab/ece385/FinalProject/sprite_rom.sv}
+
+vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -L nios_system -voptargs="+acc"  testbench
+
+add wave *
+view structure
+view signals
+run 1000 ns

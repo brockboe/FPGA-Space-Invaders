@@ -1,0 +1,32 @@
+module testbench();
+
+timeunit 10ns;
+
+timeprecision 1ns;
+
+logic clk = 0;
+
+always begin: CLOCK_GENERATION
+#1 clk = ~clk;
+end
+
+initial begin: CLOCK_INITIALIZATION
+	clk = 0;
+end
+
+logic [7:0] address
+logic [7:0] data
+
+sprite_rome S(.addr(address), .data(data));
+
+initial begin
+
+address = 8'h00;
+
+#10 address = 8'h01;
+
+#10 address = 8'h10;
+
+end
+
+endmodule 
